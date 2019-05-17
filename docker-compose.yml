@@ -1,0 +1,44 @@
+version : '3.5'
+services:
+       
+  app:
+    build:
+      context: . 
+      dockerfile: Dockerfile
+    image: registry.seamfix.com/seamfix/device-provision-service:1.0.0-SNAPSHOT
+    ports: 
+      - "9990"
+      - "9993"
+      - "8009"
+      - "8080"
+      - "8443"
+      - "4712"
+      - "4713"
+      - "25"
+    environment:
+      - cache-server-list=device-provision-service-memcache-service:11211
+      - allowed-app-sign-versions=1.41 1.50 1.60
+      - JAVA_OPTS="-Djava.net.preferIPv4Stack=true"
+      - DB_CONNECTION_URL=jdbc:oracle:thin:@192.168.8.16:1521:orcl
+      - DB_USERNAME=biocapture
+      - DB_PASSWORD=s3amf1xK0l0
+    networks:
+      - network
+    extra_hosts:
+      - "BIOSERVICESDB:192.168.8.16"
+    depends_on:
+       - memcached
+    volumes:
+      - ./logs:/var/www
+  memcached:
+     container_name: device-provision-service-memcache-service
+     image: memcached
+     ports:
+       - "11211"
+     restart: always
+     networks:
+      - network
+networks:
+  network:
+    name: bioservice-network
+    driver: bridge

@@ -1,0 +1,40 @@
+
+type LicenseRequestResponse {
+    responseDescription: String!
+    responseCode: String!
+    statusResponse: StatusResponse
+}
+
+type StatusResponse {
+	status: Int
+	message: String
+}
+
+type LicenseStatusCheckResponse{
+	responseDescription: String!
+    responseCode: String!
+    licenseStatusResponse: LicenseStatusResponse
+}
+
+type LicenseStatusResponse {
+	licenseCode: String
+	statusResponse: StatusResponse
+}
+
+input LicenseRequest {
+  	macAddress: String
+	tagId: String
+	refDeviceId: String
+	agentName: String
+	agentEmail: String
+}
+
+
+type Query {
+  checkLicenseStatus(request: LicenseRequest): LicenseStatusCheckResponse
+  requestForLicense(request: LicenseRequest): LicenseRequestResponse
+}
+
+schema {
+  query: Query
+}
