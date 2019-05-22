@@ -25,6 +25,9 @@ public class VendorProvision extends BaseLongPkEntity{
 	@Column(name = "APP_ID")
 	private String appId;
 	
+	@Column(name = "APP_NAME")
+	private String appName;
+	
 	@ManyToOne
 	@JoinColumn(name="VENDOR_ID")
 	private KycDealer vendor;
@@ -52,6 +55,14 @@ public class VendorProvision extends BaseLongPkEntity{
 
 	public void setVendor(KycDealer vendor) {
 		this.vendor = vendor;
+	}
+
+	public String getAppName() {
+		return appName;
+	}
+
+	public void setAppName(String appName) {
+		this.appName = appName;
 	}
 
 }

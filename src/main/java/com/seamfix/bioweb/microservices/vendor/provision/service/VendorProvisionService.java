@@ -17,7 +17,7 @@ import com.seamfix.bioweb.microservices.vendor.provision.pojo.SuccessResponse;
 import com.seamfix.bioweb.microservices.vendor.provision.repositories.VendorProvisionRepository;
 
 @Dependent
-@Named("deviceProvisionService")
+@Named("vendorProvisionService")
 @TransactionManagement(TransactionManagementType.CONTAINER)
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
 public class VendorProvisionService {
@@ -30,16 +30,77 @@ public class VendorProvisionService {
 		this.vendorProvisionRepository = vendorProvisionRepository;
 	}
 
-	public SuccessResponse<StatusResponse> isDeviceProvisioned(String vendorId) {
+	public SuccessResponse<StatusResponse> getValidProvisionedDevice(String vendorId) {
 		SuccessResponse< StatusResponse> response = new SuccessResponse<>();
 		StatusResponse status = new StatusResponse();
 		status.setStatus(-1);
 		status.setMessage("Vendor has not been provisioned!");
 		
-		VendorProvision deviceProvision = vendorProvisionRepository.getProvisionedDevice(vendorId);
-		if(deviceProvision != null) {
+		VendorProvision vendorProvision = vendorProvisionRepository.getValidProvisionedDevice(vendorId);
+		if(vendorProvision != null) {
 			status.setStatus(0);
 			status.setMessage("Vendor has been provisioned!");
+		}
+		
+		response.setInfo(status);
+		response.setSuccessful(true);
+		return response;
+	}
+	
+	public SuccessResponse<StatusResponse> getValidProvisionedDevice(String vendorId,String appKey, String appId) {
+		SuccessResponse< StatusResponse> response = new SuccessResponse<>();
+		StatusResponse status = new StatusResponse();
+		status.setStatus(-1);
+		status.setMessage("Vendor has not been provisioned!");
+		
+		VendorProvision vendorProvision = vendorProvisionRepository.getValidProvisionedDevice(vendorId, appKey, appId);
+		if(vendorProvision != null) {
+			status.setStatus(0);
+			status.setMessage("Vendor has been provisioned!");
+		}
+		
+		response.setInfo(status);
+		response.setSuccessful(true);
+		return response;
+	}
+	
+	public SuccessResponse<StatusResponse> getProvisionedDevice(String vendorId) {
+		SuccessResponse< StatusResponse> response = new SuccessResponse<>();
+		StatusResponse status = new StatusResponse();
+		status.setStatus(0);
+		status.setMessage("Vendor has been provisioned!");
+		
+		VendorProvision vendorProvision = vendorProvisionRepository.getProvisionedDevice(vendorId);
+		if(vendorProvision == null) {
+			status.setStatus(-1);
+			status.setMessage("Vendor has not been provisioned!");
+			response.setInfo(status);
+			response.setSuccessful(true);
+			return response;
+		}
+		
+		if(!vendorProvision.isActive()) {
+			status.setStatus(-2);
+			status.setMessage("Vendor provision has been suspended!");
+			response.setInfo(status);
+			response.setSuccessful(true);
+			return response;
+		}
+		
+		if(vendorProvision.getVendor() == null) {
+			status.setStatus(-3);
+			status.setMessage("Invalid vendor provisioning!");
+			response.setInfo(status);
+			response.setSuccessful(true);
+			return response;
+		}
+		
+		if(!vendorProvision.getVendor().isActive()) {
+			status.setStatus(-4);
+			status.setMessage("Vendor has been deactivated!");
+			response.setInfo(status);
+			response.setSuccessful(true);
+			return response;
 		}
 		
 		response.setInfo(status);
