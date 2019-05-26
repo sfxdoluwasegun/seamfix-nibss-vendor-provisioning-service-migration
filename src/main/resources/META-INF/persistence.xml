@@ -6,8 +6,8 @@
 		transaction-type="JTA">
 		<jta-data-source>java:/bio/db</jta-data-source>
 		<properties>
-			<!-- property name="hibernate.hbm2ddl.auto" value="update"/-->
-			<property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect" />
+			<property name="hibernate.id.new_generator_mappings" value="false"/>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.SQLServer2012Dialect" />
 			<property name="hibernate.archive.autodetection" value="class" />
 			<property name="hibernate.transaction.jta.platform" value="org.hibernate.service.jta.platform.internal.JBossStandAloneJtaPlatform" />
 			<property name="hibernate.connection.release_mode" value="after_transaction" />
