@@ -12,7 +12,8 @@ import javax.persistence.UniqueConstraint;
 
 import org.hibernate.envers.Audited;
 
-import com.seamfix.bioweb.microservices.vendor.provision.entities.base.BaseLongPkEntity;
+import com.seamfix.kyc.microservices.utilities.entities.base.BaseLongPkEntity;
+
 
 @Audited
 @Entity
