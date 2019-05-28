@@ -9,11 +9,13 @@ import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.FormParam;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import com.seamfix.bioweb.microservices.vendor.provision.pojo.StatusResponse;
 import com.seamfix.bioweb.microservices.vendor.provision.pojo.SuccessResponse;
@@ -25,6 +27,14 @@ public class VendorProvisionEndPoint {
 	@Named("vendorProvisionService")
 	@Inject
 	private VendorProvisionService vendorProvisionService;
+	
+	@GET
+	@Path("/ping")
+	@Produces("text/plain")
+	@PermitAll
+	public Response doGet() {
+		return Response.ok("Vendor provisioning service is up and running!").build();
+	}
 	
 	@POST
 	@Path("/status")
