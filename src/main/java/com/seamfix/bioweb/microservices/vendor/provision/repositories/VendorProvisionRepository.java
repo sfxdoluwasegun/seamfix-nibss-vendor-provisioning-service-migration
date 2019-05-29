@@ -51,6 +51,13 @@ public class VendorProvisionRepository extends DataRepository {
 	public VendorProvision getValidProvisionedDevice(String vendorId, String appKey, String appId)
 			throws PersistenceException , SecurityException , IllegalStateException {
 		VendorProvision vendorProvision = null;
+		logger.debug("vendorId {} ", vendorId);
+		logger.debug("appKey {} ", appKey);
+		logger.debug("EappId {} ", appId);
+		
+		logger.error("vendorId {} ", vendorId);
+		logger.error("appKey {} ", appKey);
+		logger.error("EappId {} ", appId);
 		try {
 			Query query = persistenceHelper.getEntityManager()
 					.createQuery("select vp from VendorProvision vp where vp.vendor != null and vp.vendor.dealCode = :vendorId and vp.active = :active and vp.vendor.active = :active "
