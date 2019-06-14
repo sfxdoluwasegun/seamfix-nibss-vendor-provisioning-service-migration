@@ -16,6 +16,7 @@ import com.seamfix.bioweb.microservices.vendor.provision.entities.KycDealer;
 import com.seamfix.bioweb.microservices.vendor.provision.entities.VendorProvision;
 import com.seamfix.bioweb.microservices.vendor.provision.pojo.StatusResponse;
 import com.seamfix.bioweb.microservices.vendor.provision.pojo.SuccessResponse;
+import com.seamfix.bioweb.microservices.vendor.provision.pojo.VendorProvisionResponse;
 import com.seamfix.bioweb.microservices.vendor.provision.repositories.VendorProvisionRepository;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -32,7 +33,7 @@ public class VendorProvisionServiceTest {
 		String vendorId = "VENDORID";
 		when(vendorProvisionRepository.getValidProvisionedDevice(vendorId)).thenReturn(new VendorProvision());
 		vendorProvisionService.setVendorProvisionRepository(vendorProvisionRepository);
-		SuccessResponse<StatusResponse> response = vendorProvisionService.getValidProvisionedDevice(vendorId);
+		SuccessResponse<VendorProvisionResponse> response = vendorProvisionService.getValidProvisionedDevice(vendorId);
 		assertEquals(response.getInfo().getStatus(), 0);
 		assertEquals(response.getInfo().getMessage(), "Vendor has been provisioned!");
 	}
@@ -42,7 +43,7 @@ public class VendorProvisionServiceTest {
 		String vendorId = "VENDORID";
 		when(vendorProvisionRepository.getValidProvisionedDevice(vendorId)).thenReturn(null);
 		vendorProvisionService.setVendorProvisionRepository(vendorProvisionRepository);
-		SuccessResponse<StatusResponse> response = vendorProvisionService.getValidProvisionedDevice(vendorId);
+		SuccessResponse<VendorProvisionResponse> response = vendorProvisionService.getValidProvisionedDevice(vendorId);
 		assertEquals(response.getInfo().getStatus(), -1);
 		assertEquals(response.getInfo().getMessage(), "Vendor has not been provisioned!");
 	}

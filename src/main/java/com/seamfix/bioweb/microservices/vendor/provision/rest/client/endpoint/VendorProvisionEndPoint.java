@@ -19,6 +19,7 @@ import javax.ws.rs.core.Response;
 
 import com.seamfix.bioweb.microservices.vendor.provision.pojo.StatusResponse;
 import com.seamfix.bioweb.microservices.vendor.provision.pojo.SuccessResponse;
+import com.seamfix.bioweb.microservices.vendor.provision.pojo.VendorProvisionResponse;
 import com.seamfix.bioweb.microservices.vendor.provision.service.VendorProvisionService;
 
 @Path("/")
@@ -40,7 +41,7 @@ public class VendorProvisionEndPoint {
 	@Path("/status")
 	@Produces(MediaType.APPLICATION_JSON)
 	@PermitAll
-	public SuccessResponse<StatusResponse> getValidProvisionedDevice(@Context HttpServletRequest httpServletRequest, @Context HttpServletResponse httpServletResponse , @FormParam("vendorId") String vendorId, @FormParam("applicationKey") String appKey, @FormParam("applicationId") String appId) {
+	public SuccessResponse<VendorProvisionResponse> getValidProvisionedDevice(@Context HttpServletRequest httpServletRequest, @Context HttpServletResponse httpServletResponse , @FormParam("vendorId") String vendorId, @FormParam("applicationKey") String appKey, @FormParam("applicationId") String appId) {
 		return vendorProvisionService.getValidProvisionedDevice(vendorId, appKey, appId);
 	}
 	

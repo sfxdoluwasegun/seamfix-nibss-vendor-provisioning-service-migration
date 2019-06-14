@@ -18,6 +18,10 @@ public class KycDealer extends BaseLongPkEntity {
 	
 	@Column(name = "DEAL_CODE", nullable = true)
     private String dealCode;
+	
+	@Column(name = "NAME")
+    private String name;
+
 
 	public String getDealCode() {
 		return dealCode;
@@ -25,6 +29,14 @@ public class KycDealer extends BaseLongPkEntity {
 
 	public void setDealCode(String dealCode) {
 		this.dealCode = dealCode;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }
