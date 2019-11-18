@@ -86,5 +86,20 @@ public class VendorProvisionServiceTest {
 		assertEquals(response.getInfo().getStatus(), -4);
 		assertEquals(response.getInfo().getMessage(), "Vendor has been deactivated!");
 	}
+	
+	@Test
+    public void givenVendorId_whenGetProvisionedDeviceIsCalled_shouldReturnBlacklistedVendorAppMessage() {
+		String vendorId = "VENDORID";
+		VendorProvision vendorProvision = new VendorProvision();
+		KycDealer vendor = new KycDealer();
+		vendor.setActive(true);
+		vendorProvision.setVendor(vendor);
+		vendorProvision.setBlacklisted(true);
+		when(vendorProvisionRepository.getProvisionedDevice(vendorId)).thenReturn(vendorProvision);
+		vendorProvisionService.setVendorProvisionRepository(vendorProvisionRepository);
+		SuccessResponse<StatusResponse> response = vendorProvisionService.getProvisionedDevice(vendorId);
+		assertEquals(response.getInfo().getStatus(), -5);
+		assertEquals(response.getInfo().getMessage(), "Vendor application has been blacklisted!");
+	}
 
 }

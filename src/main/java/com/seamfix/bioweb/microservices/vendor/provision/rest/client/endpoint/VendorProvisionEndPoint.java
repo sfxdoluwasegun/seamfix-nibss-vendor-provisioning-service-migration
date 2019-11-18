@@ -52,4 +52,8 @@ public class VendorProvisionEndPoint {
 	public SuccessResponse<StatusResponse> getProvisionedDevice(@Context HttpServletRequest httpServletRequest, @Context HttpServletResponse httpServletResponse, @FormParam("vendorId") String vendorId) {
 		return vendorProvisionService.getProvisionedDevice(vendorId);
 	}
+
+	public void setVendorProvisionService(VendorProvisionService vendorProvisionService) {
+		this.vendorProvisionService = vendorProvisionService;
+	}
 }

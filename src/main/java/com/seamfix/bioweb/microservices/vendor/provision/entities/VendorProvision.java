@@ -33,6 +33,9 @@ public class VendorProvision extends BaseLongPkEntity{
 	@JoinColumn(name="VENDOR_ID")
 	private KycDealer vendor;
 	
+	@Column(name = "BLACKLISTED")
+	private Boolean blacklisted;
+	
 	
 	public String getAppKey() {
 		return appKey;
@@ -64,6 +67,14 @@ public class VendorProvision extends BaseLongPkEntity{
 
 	public void setAppName(String appName) {
 		this.appName = appName;
+	}
+
+	public Boolean getBlacklisted() {
+		return blacklisted;
+	}
+
+	public void setBlacklisted(Boolean blacklisted) {
+		this.blacklisted = blacklisted;
 	}
 
 }

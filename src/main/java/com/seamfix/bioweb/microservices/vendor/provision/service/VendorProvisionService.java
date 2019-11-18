@@ -62,6 +62,14 @@ public class VendorProvisionService {
 			status.setMessage("Vendor has been provisioned!");
 		}
 		
+		if(vendorProvision.getBlacklisted()) {
+			status.setStatus(-5);
+			status.setMessage("Vendor application has been blacklisted!");
+			response.setInfo(status);
+			response.setSuccessful(true);
+			return response;
+		}
+		
 		response.setInfo(status);
 		response.setSuccessful(true);
 		return response;
@@ -101,6 +109,14 @@ public class VendorProvisionService {
 		if(!vendorProvision.getVendor().isActive()) {
 			status.setStatus(-4);
 			status.setMessage("Vendor has been deactivated!");
+			response.setInfo(status);
+			response.setSuccessful(true);
+			return response;
+		}
+		
+		if(vendorProvision.getBlacklisted()) {
+			status.setStatus(-5);
+			status.setMessage("Vendor application has been blacklisted!");
 			response.setInfo(status);
 			response.setSuccessful(true);
 			return response;
