@@ -63,7 +63,7 @@ public class VendorProvisionService {
 		}
 		
 		if(vendorProvision.getBlacklisted()) {
-			status.setStatus(-5);
+			status.setStatus(-1);
 			status.setMessage("Vendor application has been blacklisted!");
 			response.setInfo(status);
 			response.setSuccessful(true);

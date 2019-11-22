@@ -52,7 +52,7 @@ public class VendorProvisionEndpointTest {
 		vendorProvisionService.setVendorProvisionRepository(vendorProvisionRepository);
 		endpoint.setVendorProvisionService(vendorProvisionService);
 		SuccessResponse<VendorProvisionResponse> response = endpoint.getValidProvisionedDevice(mock(HttpServletRequest.class), mock(HttpServletResponse.class), vendorId, appId, appKey);
-		assertEquals(response.getInfo().getStatus(), -5);
+		assertEquals(response.getInfo().getStatus(), -1);
 		assertEquals(response.getInfo().getMessage(), "Vendor application has been blacklisted!");
 	}
 	
