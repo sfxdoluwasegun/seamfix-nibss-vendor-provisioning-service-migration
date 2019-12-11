@@ -62,8 +62,32 @@ public class VendorProvisionService {
 			status.setMessage("Vendor has been provisioned!");
 		}
 		
+		if(!vendorProvision.isActive()) {
+			status.setStatus(-2);
+			status.setMessage("Vendor provision has been suspended!");
+			response.setInfo(status);
+			response.setSuccessful(true);
+			return response;
+		}
+		
+		if(vendorProvision.getVendor() == null) {
+			status.setStatus(-3);
+			status.setMessage("Invalid vendor provisioning!");
+			response.setInfo(status);
+			response.setSuccessful(true);
+			return response;
+		}
+		
+		if(!vendorProvision.getVendor().isActive()) {
+			status.setStatus(-4);
+			status.setMessage("Vendor has been deactivated!");
+			response.setInfo(status);
+			response.setSuccessful(true);
+			return response;
+		}
+		
 		if(vendorProvision.getBlacklisted()) {
-			status.setStatus(-1);
+			status.setStatus(-5);
 			status.setMessage("Vendor application has been blacklisted!");
 			response.setInfo(status);
 			response.setSuccessful(true);
@@ -75,6 +99,7 @@ public class VendorProvisionService {
 		return response;
 	}
 	
+	@SuppressWarnings("CPD-START")
 	public SuccessResponse<StatusResponse> getProvisionedDevice(String vendorId) {
 		SuccessResponse< StatusResponse> response = new SuccessResponse<>();
 		StatusResponse status = new StatusResponse();
