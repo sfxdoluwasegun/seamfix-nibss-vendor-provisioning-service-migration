@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.seamfix.bioweb.microservices</groupId>
 	<version>1.0.0-SNAPSHOT</version>
-	<artifactId>vendor-provision-service</artifactId>
+	<artifactId>nibss-vendor-provision-service</artifactId>
 	<packaging>war</packaging>
 
 	<properties>
@@ -14,7 +14,7 @@
 		<dockerfile-maven-version>1.4.3</dockerfile-maven-version>
 	</properties>
 
-	<name>vendor-provision-service</name>
+	<name>nibss-vendor-provision-service</name>
 	<description>This service can be used to provision a device</description>
 
 	<dependencyManagement>
