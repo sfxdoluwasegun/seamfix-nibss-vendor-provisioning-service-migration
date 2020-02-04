@@ -1,10 +1,6 @@
 package com.seamfix.bioweb.microservices.vendor.provision.constants;
 
 public class StringConstants {
-
-	public static final String GRAPH_QL_SERVLET_PATH = "/graphql";
-	public static final String HEARTBEAT = "/";
-	public static final String HEARTBEAT_LIST = "/ls";
 	
 	public static final String JBOSS_HOME_DIR = "jboss.home.dir";
 
