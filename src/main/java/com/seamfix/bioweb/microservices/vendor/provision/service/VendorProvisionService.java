@@ -56,11 +56,12 @@ public class VendorProvisionService {
 		status.setMessage("Vendor has not been provisioned!");
 		
 		VendorProvision vendorProvision = vendorProvisionRepository.getValidProvisionedDevice(vendorId, appKey, appId);
-		if(vendorProvision != null) {
-			status.setVendorProvision(vendorProvision);
-			status.setStatus(0);
-			status.setMessage("Vendor has been provisioned!");
+		if(vendorProvision == null){
+			return response;
 		}
+		status.setVendorProvision(vendorProvision);
+		status.setStatus(0);
+		status.setMessage("Vendor has been provisioned!");
 		
 		if(!vendorProvision.isActive()) {
 			status.setStatus(-2);
