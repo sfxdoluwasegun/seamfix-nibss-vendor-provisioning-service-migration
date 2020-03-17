@@ -57,6 +57,8 @@ public class VendorProvisionService {
 		
 		VendorProvision vendorProvision = vendorProvisionRepository.getValidProvisionedDevice(vendorId, appKey, appId);
 		if(vendorProvision == null){
+			response.setInfo(status);
+			response.setSuccessful(true);
 			return response;
 		}
 		status.setVendorProvision(vendorProvision);
