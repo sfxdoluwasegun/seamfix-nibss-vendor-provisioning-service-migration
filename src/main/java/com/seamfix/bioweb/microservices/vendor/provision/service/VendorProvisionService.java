@@ -21,6 +21,7 @@ import com.seamfix.bioweb.microservices.vendor.provision.repositories.VendorProv
 @Named("vendorProvisionService")
 @TransactionManagement(TransactionManagementType.CONTAINER)
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
+@SuppressWarnings("PMD.NcssCount")
 public class VendorProvisionService {
 	
 	@Named("vendorProvisionRepository")
@@ -36,7 +37,7 @@ public class VendorProvisionService {
 		VendorProvisionResponse status = new VendorProvisionResponse();
 		status.setStatus(-1);
 		status.setMessage("Vendor has not been provisioned!");
-		
+
 		VendorProvision vendorProvision = vendorProvisionRepository.getValidProvisionedDevice(vendorId);
 		if(vendorProvision != null) {
 			status.setVendorProvision(vendorProvision);
@@ -56,8 +57,9 @@ public class VendorProvisionService {
 		status.setMessage("Vendor has not been provisioned!");
 		
 		VendorProvision vendorProvision = vendorProvisionRepository.getValidProvisionedDevice(vendorId, appKey, appId);
-		if (vendorProvision == null) {
+		if(vendorProvision == null){
 			response.setInfo(status);
+			response.setSuccessful(true);
 			return response;
 		}
 		status.setVendorProvision(vendorProvision);
