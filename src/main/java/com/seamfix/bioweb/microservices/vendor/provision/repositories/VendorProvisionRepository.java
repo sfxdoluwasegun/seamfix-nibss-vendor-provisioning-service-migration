@@ -24,7 +24,7 @@ public class VendorProvisionRepository extends DataRepository {
 		VendorProvision vendorProvision = null;
 		try {
 			Query query = persistenceHelper.getEntityManager()
-					.createQuery("select vp from VendorProvision vp where vp.vendor.dealCode = :vendorId");
+					.createQuery("select vp from PROVISIONED_VENDORS vp where vp.vendor.dealCode = :vendorId");
 			query.setParameter("vendorId", vendorId);
 			vendorProvision = (VendorProvision) query.getSingleResult();
 		} catch (PersistenceException | SecurityException | IllegalStateException e) {
@@ -38,7 +38,7 @@ public class VendorProvisionRepository extends DataRepository {
 			VendorProvision vendorProvision = null;
 			try {
 				Query query = persistenceHelper.getEntityManager()
-						.createQuery("select vp from VendorProvision vp where vp.vendor != null and vp.vendor.dealCode = :vendorId and vp.active = :active and vp.vendor.active = :active");
+						.createQuery("select vp from PROVISIONED_VENDORS vp where vp.vendor != null and vp.vendor.dealCode = :vendorId and vp.active = :active and vp.vendor.active = :active");
 				query.setParameter("vendorId", vendorId);
 				query.setParameter("active", true);
 				vendorProvision = (VendorProvision) query.getSingleResult();
@@ -60,7 +60,7 @@ public class VendorProvisionRepository extends DataRepository {
 		logger.error("EappId {} ", appId);
 		try {
 			Query query = persistenceHelper.getEntityManager()
-					.createQuery("select vp from VendorProvision vp where vp.vendor != null and vp.vendor.dealCode = :vendorId and vp.active = :active and vp.vendor.active = :active "
+					.createQuery("select vp from PROVISIONED_VENDORS vp where vp.vendor != null and vp.vendor.dealCode = :vendorId and vp.active = :active and vp.vendor.active = :active "
 							+ "and vp.appKey = :appKey and vp.appId = :appId");
 			query.setParameter("vendorId", vendorId);
 			query.setParameter("appKey", appKey);
